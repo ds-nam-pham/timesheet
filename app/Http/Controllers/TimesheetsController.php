@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\timesheets;
-use App\Http\Requests\StoretimesheetsRequest;
-use App\Http\Requests\UpdatetimesheetsRequest;
+use App\Models\Timesheet;
+use App\Http\Requests\Timesheet\StoreTimesheetsRequest;
+use App\Http\Requests\Timesheet\UpdateTimesheetsRequest;
 
 class TimesheetsController extends Controller
 {
@@ -31,7 +31,7 @@ class TimesheetsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoretimesheetsRequest  $request
+     * @param  \App\Http\Requests\TimeSheet\StoreTimesheetsRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoretimesheetsRequest $request)
@@ -42,10 +42,10 @@ class TimesheetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\timesheets  $timesheets
+     * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function show(timesheets $timesheets)
+    public function show(Timesheet $timesheets)
     {
         //
     }
@@ -53,10 +53,10 @@ class TimesheetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\timesheets  $timesheets
+     * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function edit(timesheets $timesheets)
+    public function edit(StoretimesheetsRequest $timesheets)
     {
         //
     }
@@ -64,11 +64,11 @@ class TimesheetsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatetimesheetsRequest  $request
-     * @param  \App\Models\timesheets  $timesheets
+     * @param  \App\Http\Requests\TimeSheet\UpdatetimesheetsRequest  $request
+     * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatetimesheetsRequest $request, timesheets $timesheets)
+    public function update(UpdatetimesheetsRequest $request, Timesheet $timesheets)
     {
         //
     }
@@ -76,10 +76,10 @@ class TimesheetsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\timesheets  $timesheets
+     * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function destroy(timesheets $timesheets)
+    public function destroy(Timesheet $timesheets)
     {
         //
     }

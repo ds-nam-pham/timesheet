@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Services\UserService;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use App\Services\User\UserService;
+use GuzzleHttp\Psr7\Request;
+
 class UsersController extends Controller
 {
     protected $userService;
@@ -20,8 +22,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
-        return view('user.index');
+        $result = $this->userService->index();
+        return view('user.index',['users' => $result]);
     }
 
     /**
@@ -31,20 +33,19 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
         return view('user.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
+     * @param  \App\Http\Requests\\User\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUserRequest $request)
     {
         $result = $this->userService->addUser($request->all());
-        dd($result);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -53,9 +54,11 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user,string $id)
     {
-        //
+        return view('user.edit', [
+            'user' => User::findOrFail($id)
+        ]);
     }
 
     /**
@@ -64,21 +67,24 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, string $id)
     {
-        //
+        return view('user.edit', [
+            'user' => User::findOrFail($id)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  \App\Http\Requests\User\UpdateUserRequest  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user, string $id)
     {
-        //
+        $result = $this->userService->editUser($request->all(), $id);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -87,8 +93,9 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, string $id)
     {
-        //
+        $result = $this->userService->delete($id);
+        return redirect()->route('user.index');
     }
 }

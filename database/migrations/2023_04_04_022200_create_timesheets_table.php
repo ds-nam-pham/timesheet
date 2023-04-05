@@ -14,8 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('timesheets', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->dateTime('date')->nullable();
+            $table->dateTime('time_spent')->nullable();
+            $table->integer('task_id');
+            $table->text('task_content');
+            $table->text('difficulties');
+            $table->text('plan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

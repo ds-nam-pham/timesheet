@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TimeSheet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class StoretimesheetsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
