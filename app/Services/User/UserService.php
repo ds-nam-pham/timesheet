@@ -18,7 +18,7 @@ class UserService extends BaseService
     }
 
     public function addUser($data){
-        $url_avatar = $data['avatar']->storeAs('public/avatar', $data['avatar']->getClientOriginalName());
+        // $url_avatar = $data['avatar']->storeAs('public/avatar', $data['avatar']->getClientOriginalName());
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -30,18 +30,12 @@ class UserService extends BaseService
     }
 
     public function editUser($data, $id){
-        $input = [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'description' => $data['description'],
-            'password' => $data['password'],
-        ];
         $user = User::find($id);
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->description = $data['description'];
         $user->password = $data['password'];
-        $user->save($input);
+        $user->save();
         return true;
     }
 

@@ -9,10 +9,12 @@ class Timesheet extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'avatar',
-        'description'
+        'user_id',
+        'task_id',
+        'task_content',
+        'date',
+        'time_spent',
+        'difficulties',
+        'plan'
     ];
 }

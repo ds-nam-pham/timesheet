@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TimesheetsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +35,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
     Route::post('/user/{id}', [UsersController::class, 'update'])->name('user.update');;
     Route::get('/user/{id}/delete', [UsersController::class, 'destroy'])->name('user.destroy');
+
+    Route::get('/timesheet', [TimesheetsController::class, 'index'])->name('timesheet.index');
+    Route::get('/timesheet/create', [TimesheetsController::class, 'create'])->name('timesheet.create');
+    Route::post('/timesheet', [TimesheetsController::class, 'store'])->name('timesheet.store');
+    Route::get('/timesheet/{id}', [TimesheetsController::class, 'show'])->name('timesheet.show');
+    Route::get('/timesheet/{id}/edit', [TimesheetsController::class, 'edit'])->name('timesheet.edit');
+    Route::post('/timesheet/{id}', [TimesheetsController::class, 'update'])->name('timesheet.update');;
+    
 });
 

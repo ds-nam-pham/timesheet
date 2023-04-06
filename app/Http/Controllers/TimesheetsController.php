@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Timesheet;
 use App\Http\Requests\Timesheet\StoreTimesheetsRequest;
 use App\Http\Requests\Timesheet\UpdateTimesheetsRequest;
+use App\Services\Timesheet\TimesheetService;
+use Illuminate\Support\Facades\Auth;
 
 class TimesheetsController extends Controller
 {
+    protected $timesheetService;
+    public function __construct(TimesheetService $timesheetService)
+    {
+        $this->timesheetService = $timesheetService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,8 @@ class TimesheetsController extends Controller
      */
     public function index()
     {
-        //
+        $result = $this->timesheetService->listTimesheet();
+        return view('timesheet.index', ['timesheets'=>$result]);
     }
 
     /**
@@ -25,7 +33,7 @@ class TimesheetsController extends Controller
      */
     public function create()
     {
-        //
+        return view('timesheet.create');
     }
 
     /**
@@ -36,7 +44,8 @@ class TimesheetsController extends Controller
      */
     public function store(StoretimesheetsRequest $request)
     {
-        //
+        $result = $this->timesheetService->createTimesheet($request->all(), Auth::User()->id);
+        return redirect()->route('timesheet.index');
     }
 
     /**
@@ -45,9 +54,12 @@ class TimesheetsController extends Controller
      * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function show(Timesheet $timesheets)
+    public function show(Timesheet $timesheets, $id)
     {
-        //
+        
+        return view('timesheet.show', [
+            'timesheet' => Timesheet::findOrFail($id)
+        ]);
     }
 
     /**
@@ -56,9 +68,11 @@ class TimesheetsController extends Controller
      * @param  \App\Models\Timesheets  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function edit(StoretimesheetsRequest $timesheets)
+    public function edit(StoretimesheetsRequest $timesheets, $id)
     {
-        //
+        return view('timesheet.edit', [
+            'timesheet' => Timesheet::findOrFail($id)
+        ]);
     }
 
     /**
@@ -70,7 +84,8 @@ class TimesheetsController extends Controller
      */
     public function update(UpdatetimesheetsRequest $request, Timesheet $timesheets)
     {
-        //
+        $result = $this->timesheetService->updateTimesheet($request->all(), Auth::User()->id);
+        return redirect()->route('timesheet.index');
     }
 
     /**

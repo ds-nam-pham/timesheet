@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->dateTime('date')->nullable();
-            $table->dateTime('time_spent')->nullable();
+            $table->time('time_spent')->nullable();
             $table->integer('task_id');
             $table->text('task_content');
             $table->text('difficulties');
