@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\TimesheetsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +44,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/timesheet/{id}/edit', [TimesheetsController::class, 'edit'])->name('timesheet.edit');
     Route::post('/timesheet/{id}', [TimesheetsController::class, 'update'])->name('timesheet.update');;
     
+    //fullcalender
+    Route::get('fullcalendar',[FullCalendarController::class,'index']);
+    Route::post('fullcalendar/create',[FullCalendarController::class,'store']);
+    Route::post('fullcalendar/update',[FullCalendarController::class,'update']);
+    Route::post('fullcalendar/delete',[FullCalendarController::class,'destroy']);
 });
 
