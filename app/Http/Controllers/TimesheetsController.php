@@ -44,34 +44,33 @@ class TimesheetsController extends Controller
      */
     public function store(StoretimesheetsRequest $request)
     {
-        $result = $this->timesheetService->createTimesheet($request->all(), Auth::User()->id);
+        $result = $this->timesheetService->createTimesheet($request->all(), Auth::User());
         return redirect()->route('timesheet.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Timesheets  $timesheets
+     * @param  \App\Models\Timesheet  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function show(Timesheet $timesheets, $id)
+    public function show(Timesheet $timesheet)
     {
-        
         return view('timesheet.show', [
-            'timesheet' => Timesheet::findOrFail($id)
+            'timesheet' => $timesheet
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Timesheets  $timesheets
+     * @param  \App\Models\Timesheet  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function edit(StoretimesheetsRequest $timesheets, $id)
+    public function edit(Timesheet $timesheet)
     {
         return view('timesheet.edit', [
-            'timesheet' => Timesheet::findOrFail($id)
+            'timesheet' => $timesheet
         ]);
     }
 
@@ -79,22 +78,22 @@ class TimesheetsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\TimeSheet\UpdatetimesheetsRequest  $request
-     * @param  \App\Models\Timesheets  $timesheets
+     * @param  \App\Models\Timesheet  $timesheet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatetimesheetsRequest $request, Timesheet $timesheets)
+    public function update(UpdatetimesheetsRequest $request, Timesheet $timesheet)
     {
-        $result = $this->timesheetService->updateTimesheet($request->all(), Auth::User()->id);
+        $result = $this->timesheetService->updateTimesheet($request->all(), $timesheet);
         return redirect()->route('timesheet.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Timesheets  $timesheets
+     * @param  \App\Models\Timesheet  $timesheets
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Timesheet $timesheets)
+    public function destroy(Timesheet $timesheet)
     {
         //
     }

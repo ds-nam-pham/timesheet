@@ -22,14 +22,23 @@
         <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="avatar" width="50">
        </td>
        <td>{{$user->description}}</td>
-       <td>
-          <!-- <button type="button" class="btn btn-sm btn-primary">Edit</button>
-          <button type="button" class="btn btn-sm btn-danger">Delete</button> -->
-          <a class="btn btn-sm btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
-          <a class="btn btn-sm btn-danger" href="{{ route('user.destroy',$user->id) }}">delete</a>
+       <td class="text-center d-flex">
+          <a class="btn btn-sm btn-primary" href="{{ route('user.edit',$user->id) }}"><i class="fa fa-edit"> </i></a>
+          <form method="POST" action="{{ route('user.destroy', $user->id) }}">
+            @csrf
+            <input name="_method" type="hidden" value="DELETE">
+            <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
+        </form>
        </td>
      </tr>
     @endforeach
   </tbody>
 </table>
+<script type="text/javascript">
+  $('.show_confirm').click(function(e) {
+      if(!confirm('Are you sure you want to delete this?')) {
+          e.preventDefault();
+      }
+  });
+</script>
 @stop

@@ -9,40 +9,40 @@ namespace App\Services\User;
 
 use App\Models\User;
 use App\Services\BaseService;
+use Illuminate\Support\Arr;
 
-class UserService extends BaseService
+class UserService extends BaseService implements UserServiceInterface
 {
     public function index(){
-        $user = User::all();
-        return $user;
+        return User::all();
+    }
+
+    public function find(User $user){
+        return User::find($user->id);
     }
 
     public function addUser($data){
-        // $url_avatar = $data['avatar']->storeAs('public/avatar', $data['avatar']->getClientOriginalName());
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'avatar' => $data['avatar']->getClientOriginalName(),
-            'description' => $data['description'],
-            'password' => $data['password'],
+        return User::create([
+            'name' => Arr::get($data,'name'),
+            'email' => Arr::get($data,'email'),
+            'avatar' => Arr::get($data,'avatar')->getClientOriginalName(),
+            'description' => Arr::get($data,'description'),
+            'password' => Arr::get($data,'password'),
         ]);
-        return true;
     }
 
-    public function editUser($data, $id){
-        $user = User::find($id);
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->description = $data['description'];
-        $user->password = $data['password'];
+    public function editUser($data,User $user){
+        $user->name = Arr::get($data,'email');
+        $user->email = Arr::get($data,'email');
+        $user->avatar = Arr::get($data,'avatar')->getClientOriginalName();
+        $user->description = Arr::get($data,'description');
+        $user->password = Arr::get($data,'password');
         $user->save();
         return true;
     }
 
-    public function delete($id){
-        $user = User::find($id);
-        $user->delete();
-        return true;
+    public function delete(User $user){
+        return $user->delete();
     }
     
 }

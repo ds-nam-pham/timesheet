@@ -1,7 +1,9 @@
 <?php
    
 namespace App\Http\Controllers;
-   
+
+use App\Http\Requests\TimeSheet\StoretimesheetsRequest;
+use App\Http\Requests\TimeSheet\UpdatetimesheetsRequest;
 use App\Models\Event;
 use App\Models\Timesheet;
 use Illuminate\Http\Request;
@@ -36,7 +38,7 @@ class FullCalendarController extends Controller
     }
     
    
-    public function store(Request $request)
+    public function store(StoretimesheetsRequest $request)
     {  
         $insertArr = [ 'task_id' => $request->task_id,
                        'task_content' => $request->task_content,
@@ -51,7 +53,7 @@ class FullCalendarController extends Controller
     }
      
  
-    public function update(Request $request)
+    public function update(UpdatetimesheetsRequest $request, Timesheet $timesheet)
     {   
         $where = array('id' => $request->id);
         if($request->check_update){
@@ -67,21 +69,20 @@ class FullCalendarController extends Controller
         } else{
             $event  = Timesheet::where($where)->update(['date' => $request->date]);
         }
-        
         return response()->json($event);
     } 
  
  
-    public function destroy(Request $request)
+    public function destroy(Timesheet $timesheet)
     {
-        $event = Timesheet::where('id',$request->id)->delete();
+        $event = Timesheet::where('id',$timesheet->id)->delete();
    
         return response()->json($event);
     }    
 
-    public function view(Request $request)
+    public function show(Timesheet $timesheet)
     {
-        $where = array('id' => $request->id);
+        $where = array('id' => $timesheet->id);
         $event  = Timesheet::where($where)->get();
         return response()->json($event);
     }

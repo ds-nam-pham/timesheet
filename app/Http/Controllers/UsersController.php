@@ -40,10 +40,10 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\\User\StoreUserRequest  $request
+     * @param  \App\Http\Requests\User\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request, User $user)
+    public function store(StoreUserRequest $request)
     {
         
         $result = $this->userService->addUser($request->all());
@@ -56,10 +56,10 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user,string $id)
+    public function show(User $user)
     {
         return view('user.edit', [
-            'user' => User::findOrFail($id)
+            'user' => $user
         ]);
     }
 
@@ -69,10 +69,10 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, string $id)
+    public function edit(User $user)
     {
         return view('user.edit', [
-            'user' => User::findOrFail($id)
+            'user' => $user
         ]);
     }
 
@@ -83,10 +83,10 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $ass = $this->authorize('update', $user);
-        $result = $this->userService->editUser($request->all(), $id);
+        $this->authorize('update', $user);
+        $result = $this->userService->editUser($request->all(), $user);
         return redirect()->route('user.index');
     }
 
@@ -96,9 +96,9 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, string $id)
+    public function destroy(User $user)
     {
-        $result = $this->userService->delete($id);
+        $result = $this->userService->delete($user);
         return redirect()->route('user.index');
     }
 }

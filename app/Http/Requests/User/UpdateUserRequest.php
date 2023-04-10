@@ -21,7 +21,7 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules($record = null)
+    public function rules()
     {
         return [
             'name' => 'required|string|max:255',

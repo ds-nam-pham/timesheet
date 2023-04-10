@@ -1,8 +1,9 @@
 @extends('layouts.home')
 
 @section('content')
-    <form method="post" action="{{ route('timesheet.update', $timesheet->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('timesheet.update', $timesheet->id) }}" enctype="multipart/form-data">
         {{ csrf_field() }}
+        @method('PATCH')
         <div class="mb-3">
             <input hidden type="id" name="id" class="form-control" id="id" value="{{ $timesheet->id }}">
         </div>

@@ -8,38 +8,39 @@
 namespace App\Services\Timesheet;
 
 use App\Models\Timesheet;
+use App\Models\User;
 use App\Services\BaseService;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 
-class TimesheetService extends BaseService
+class TimesheetService extends BaseService implements TimesheetServiceInterface
 {
-    public function createTimesheet($data, $user_id){
-        $timesheet = Timesheet::create([
-            'user_id' => $user_id,
-            'task_id' => $data['task_id'],
-            'task_content' => $data['task_content'],
-            'date' => $data['date'],
-            'time_spent' => $data['time_spent'],
-            'difficulties' => $data['difficulties'],
-            'plan' => $data['plan'],
+    public function find(Timesheet $timesheet){
+        return Timesheet::find($timesheet->id);
+    }
+
+    public function createTimesheet($data, User $user){
+        return $user->timesheets()->create([
+            'task_id' => Arr::get($data,'task_id'),
+            'task_content' => Arr::get($data,'task_content'),
+            'date' => Arr::get($data,'date'),
+            'time_spent' => Arr::get($data,'time_spent'),
+            'difficulties' => Arr::get($data,'difficulties'),
+            'plan' => Arr::get($data,'plan'),
         ]);
-        return true;
     }
 
     public function listTimesheet(){
-        $timesheet = Timesheet::all();
-        return $timesheet;
+        return Timesheet::all();
     }
 
-    public function updateTimesheet($data, $user_id){
-        $timesheet = Timesheet::find($data['id']);
-        $timesheet->user_id = $user_id;
-        $timesheet->task_id = $data['task_id'];
-        $timesheet->task_content = $data['task_content'];
-        $timesheet->date = $data['date'];
-        $timesheet->time_spent = $data['time_spent'];
-        $timesheet->difficulties = $data['difficulties'];
-        $timesheet->plan = $data['plan'];
+    public function updateTimesheet($data,Timesheet $timesheet){
+        $timesheet->task_id = Arr::get($data,'task_id');
+        $timesheet->task_content = Arr::get($data,'task_content');
+        $timesheet->date = Arr::get($data,'date');
+        $timesheet->time_spent = Arr::get($data,'time_spent');
+        $timesheet->difficulties = Arr::get($data,'difficulties');
+        $timesheet->plan = Arr::get($data,'plan');
         $timesheet->save();
         return true;
     }

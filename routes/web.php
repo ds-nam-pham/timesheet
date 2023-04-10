@@ -29,26 +29,13 @@ Route::get('/logout', [AuthController::class, 'signOut'])->name('signout');
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/user', [UsersController::class, 'index'])->name('user.index');
-    Route::get('/user/create', [UsersController::class, 'create'])->name('user.create');
-    Route::post('/user', [UsersController::class, 'store'])->name('user.store');
-    Route::get('/user/{id}', [UsersController::class, 'show'])->name('user.show');
-    Route::get('/user/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
-    Route::post('/user/{id}', [UsersController::class, 'update'])->name('user.update');;
-    Route::get('/user/{id}/delete', [UsersController::class, 'destroy'])->name('user.destroy');
-
-    Route::get('/timesheet', [TimesheetsController::class, 'index'])->name('timesheet.index');
-    Route::get('/timesheet/create', [TimesheetsController::class, 'create'])->name('timesheet.create');
-    Route::post('/timesheet', [TimesheetsController::class, 'store'])->name('timesheet.store');
-    Route::get('/timesheet/{id}', [TimesheetsController::class, 'show'])->name('timesheet.show');
-    Route::get('/timesheet/{id}/edit', [TimesheetsController::class, 'edit'])->name('timesheet.edit');
-    Route::post('/timesheet/{id}', [TimesheetsController::class, 'update'])->name('timesheet.update');;
-    
-    //fullcalender
-    Route::get('fullcalendar',[FullCalendarController::class,'index']);
-    Route::post('fullcalendar/create',[FullCalendarController::class,'store']);
-    Route::post('fullcalendar/update',[FullCalendarController::class,'update']);
-    Route::post('fullcalendar/delete',[FullCalendarController::class,'destroy']);
-    Route::post('fullcalendar/view',[FullCalendarController::class,'view']);
+    Route::resource('user', UsersController::class);
+    Route::resource('timesheet', TimesheetsController::class);
+    // //fullcalender
+    Route::get('/fullcalendar1',[FullCalendarController::class,'index'])->name('fullcalendar.index');
+    Route::post('/fullcalendar',[FullCalendarController::class,'store'])->name('fullcalendar.store');
+    Route::patch('/fullcalendar/{timesheet}',[FullCalendarController::class,'update'])->name('fullcalendar.update');
+    Route::delete('/fullcalendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('fullcalendar.destroy');
+    Route::get('/fullcalendar/{timesheet}',[FullCalendarController::class,'show'])->name('fullcalendar.show');
 });
 
