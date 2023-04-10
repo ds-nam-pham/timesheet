@@ -14,6 +14,7 @@ class UsersController extends Controller
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+        // $this->authorizeResource(User::class);
     }
     /**
      * Display a listing of the resource.
@@ -42,8 +43,9 @@ class UsersController extends Controller
      * @param  \App\Http\Requests\\User\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request, User $user)
     {
+        
         $result = $this->userService->addUser($request->all());
         return redirect()->route('user.index');
     }
@@ -83,6 +85,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user, string $id)
     {
+        $ass = $this->authorize('update', $user);
         $result = $this->userService->editUser($request->all(), $id);
         return redirect()->route('user.index');
     }

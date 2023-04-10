@@ -18,13 +18,15 @@ class FullCalendarController extends Controller
             $Timesheets = Timesheet::all();
             $data = [];
             foreach ($Timesheets as $key => $Timesheet) {
-                $insertArr = [ 'task_id' => $Timesheet->task_id,
+                $insertArr = [
+                       'id'=> $Timesheet->id,
+                       'task_id' => $Timesheet->task_id,
                        'title' => $Timesheet->task_content,
                        'date' => $Timesheet->date,
                        'time_spent' => $Timesheet->time_spent,
                        'difficulties' => $Timesheet->difficulties,
                        'plan' => $Timesheet->plan,
-                       'user_id' => Auth::User()->id
+                       'user_id' => Auth::User()->id,
                     ];
                     array_push($data, $insertArr);
                 }
@@ -52,7 +54,20 @@ class FullCalendarController extends Controller
     public function update(Request $request)
     {   
         $where = array('id' => $request->id);
-        $event  = Timesheet::where($where)->update(['date' => $request->date]);
+        if($request->check_update){
+            $insertArr = [ 'task_id' => $request->task_id,
+                       'task_content' => $request->task_content,
+                       'date' => $request->date,
+                       'time_spent' => $request->time_spent,
+                       'difficulties' => $request->difficulties,
+                       'plan' => $request->plan,
+                       'user_id' => Auth::User()->id
+                    ];
+            $event  = Timesheet::where($where)->update($insertArr);
+        } else{
+            $event  = Timesheet::where($where)->update(['date' => $request->date]);
+        }
+        
         return response()->json($event);
     } 
  
@@ -63,5 +78,12 @@ class FullCalendarController extends Controller
    
         return response()->json($event);
     }    
+
+    public function view(Request $request)
+    {
+        $where = array('id' => $request->id);
+        $event  = Timesheet::where($where)->get();
+        return response()->json($event);
+    }
 
 }

@@ -49,5 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('fullcalendar/create',[FullCalendarController::class,'store']);
     Route::post('fullcalendar/update',[FullCalendarController::class,'update']);
     Route::post('fullcalendar/delete',[FullCalendarController::class,'destroy']);
+    Route::post('fullcalendar/view',[FullCalendarController::class,'view']);
 });
 
