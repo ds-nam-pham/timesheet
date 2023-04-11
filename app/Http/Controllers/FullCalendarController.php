@@ -6,33 +6,24 @@ use App\Http\Requests\TimeSheet\StoretimesheetsRequest;
 use App\Http\Requests\TimeSheet\UpdatetimesheetsRequest;
 use App\Models\Event;
 use App\Models\Timesheet;
+use App\Services\Calendar\CalendarService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Redirect,Response;
    
 class FullCalendarController extends Controller
 {
+    protected $calendarService;
+    public function __construct(CalendarService $calendarService)
+    {
+        $this->calendarService = $calendarService;
+    }
  
     public function index()
     {
         if(request()->ajax()) 
         {
-            $Timesheets = Timesheet::all();
-            $data = [];
-            foreach ($Timesheets as $key => $Timesheet) {
-                $insertArr = [
-                       'id'=> $Timesheet->id,
-                       'task_id' => $Timesheet->task_id,
-                       'title' => $Timesheet->task_content,
-                       'date' => $Timesheet->date,
-                       'time_spent' => $Timesheet->time_spent,
-                       'difficulties' => $Timesheet->difficulties,
-                       'plan' => $Timesheet->plan,
-                       'user_id' => Auth::User()->id,
-                    ];
-                    array_push($data, $insertArr);
-                }
-            return response()->json($data);
+            return response()->json(Timesheet::all());
         }
         return view('fullcalendar.index');
     }
@@ -40,51 +31,29 @@ class FullCalendarController extends Controller
    
     public function store(StoretimesheetsRequest $request)
     {  
-        $insertArr = [ 'task_id' => $request->task_id,
-                       'task_content' => $request->task_content,
-                       'date' => $request->date,
-                       'time_spent' => $request->time_spent,
-                       'difficulties' => $request->difficulties,
-                       'plan' => $request->plan,
-                       'user_id' => Auth::User()->id
-                    ];
-        $event = Timesheet::create($insertArr);   
+        $event = $this->calendarService->createTimesheet($request->all(), Auth::user()); 
         return response()->json($event);
     }
      
  
     public function update(UpdatetimesheetsRequest $request, Timesheet $timesheet)
     {   
-        $where = array('id' => $request->id);
-        if($request->check_update){
-            $insertArr = [ 'task_id' => $request->task_id,
-                       'task_content' => $request->task_content,
-                       'date' => $request->date,
-                       'time_spent' => $request->time_spent,
-                       'difficulties' => $request->difficulties,
-                       'plan' => $request->plan,
-                       'user_id' => Auth::User()->id
-                    ];
-            $event  = Timesheet::where($where)->update($insertArr);
-        } else{
-            $event  = Timesheet::where($where)->update(['date' => $request->date]);
-        }
+        $event = $this->calendarService->updateTimesheet($request->all(), $timesheet, $request->check_update); 
         return response()->json($event);
     } 
  
  
     public function destroy(Timesheet $timesheet)
     {
-        $event = Timesheet::where('id',$timesheet->id)->delete();
+        $this->authorize('delete', $timesheet);
+        $event = $this->calendarService->delete($timesheet);
    
         return response()->json($event);
     }    
 
     public function show(Timesheet $timesheet)
     {
-        $where = array('id' => $timesheet->id);
-        $event  = Timesheet::where($where)->get();
-        return response()->json($event);
+        return response()->json($timesheet);
     }
 
 }

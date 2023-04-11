@@ -69,9 +69,15 @@ class TimesheetsController extends Controller
      */
     public function edit(Timesheet $timesheet)
     {
-        return view('timesheet.edit', [
-            'timesheet' => $timesheet
-        ]);
+        $user = Auth::user();
+        if ($user->can('update', $timesheet)) {
+            return view('timesheet.edit', [
+                'timesheet' => $timesheet
+            ]);
+        } else {
+        abort('403');
+        }
+        
     }
 
     /**
@@ -83,6 +89,7 @@ class TimesheetsController extends Controller
      */
     public function update(UpdatetimesheetsRequest $request, Timesheet $timesheet)
     {
+        
         $result = $this->timesheetService->updateTimesheet($request->all(), $timesheet);
         return redirect()->route('timesheet.index');
     }
@@ -96,5 +103,6 @@ class TimesheetsController extends Controller
     public function destroy(Timesheet $timesheet)
     {
         //
+        
     }
 }

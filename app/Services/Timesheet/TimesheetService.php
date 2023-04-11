@@ -1,9 +1,4 @@
 <?php
-/**
-* UserService class
-* Author: trinhnv
-* Date: 2021/01/12 10:34
-*/
 
 namespace App\Services\Timesheet;
 
@@ -43,5 +38,9 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
         $timesheet->plan = Arr::get($data,'plan');
         $timesheet->save();
         return true;
+    }
+
+    public function delete(Timesheet $timesheet){
+        return $timesheet->delete();
     }
 }

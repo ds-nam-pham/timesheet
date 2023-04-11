@@ -9,22 +9,7 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-
-    <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Interface
-    </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -53,12 +38,18 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <a class="collapse-item" href="{{ route('timesheet.index') }}">list Timesheet</a>
+                <a class="collapse-item" href="{{ route('timesheet.create') }}">Add Timesheet</a>
             </div>
         </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('calendar.index') }}"
+            aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Calendar Timesheet</span>
+        </a>
     </li>
 
 </ul>

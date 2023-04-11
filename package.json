@@ -15,7 +15,11 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.5",
+        "@fullcalendar/daygrid": "^6.1.5",
+        "@fullcalendar/interaction": "^6.1.5",
         "fullcalendar": "^6.1.5",
-        "jquery": "^3.6.4"
+        "jquery": "^3.6.4",
+        "moment": "^2.29.4"
     }
 }

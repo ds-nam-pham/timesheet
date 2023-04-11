@@ -1,10 +1,10 @@
 <?php
-namespace App\Services\Timesheet;
+namespace App\Services\Calendar;
 
 use App\Models\Timesheet;
 use App\Models\User;
 
-interface TimesheetServiceInterface {
+interface CalendarServiceInterface {
 
     public function find(Timesheet $timesheet);
 
@@ -12,7 +12,8 @@ interface TimesheetServiceInterface {
 
     public function listTimesheet();
 
-    public function updateTimesheet($data, Timesheet $timesheet);
+    public function updateTimesheet($data, Timesheet $timesheet, $check);
 
     public function delete(Timesheet $timesheet);
+
 }

@@ -8,11 +8,11 @@ window._ = _;
  */
 
 import axios from 'axios';
-import jQuery from 'jquery';
+import $ from 'jquery';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.$ = window.jQuery = jQuery;
+window.$ = window.jQuery = $;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -22,6 +22,7 @@ window.$ = window.jQuery = jQuery;
 // import Echo from 'laravel-echo';
 
 import 'bootstrap';
+import 'moment';
 import 'fullcalendar';
 
 // import Pusher from 'pusher-js';

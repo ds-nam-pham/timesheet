@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>SB Admin 2 - Dashboard</title>
 
@@ -17,38 +18,32 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="{{ asset('bootstrap5/css/bootstrap.css') }}" rel="stylesheet">
     <script src="{{ asset('bootstrap5/js/bootstrap.js') }}" crossorigin="anonymous"></script>
     <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('template/js/jquery.min.js') }}" crossorigin="anonymous"></script>
-    <script src="{{ asset('template/js/b-admin-2.min') }}" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-</head>
-<style>
-    input[type=time]::-webkit-datetime-edit-ampm-field {
-        display: none;
-    }
-    input[type="time"]::-webkit-calendar-picker-indicator {
-        background: none;
-    }
-</style>
-<body id="page-top">
+     <!-- fullcalendar-->
+    <link rel="stylesheet" href="{{ asset('fullcalendar/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('fullcalendar/fullcalendar.3.9.0.css') }}" />
+    <link rel="stylesheet" href="{{ asset('fullcalendar/fullcalendar.css') }}" />
+    @yield('css')
 
+    <script src="{{ asset('fullcalendar/jquery.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('fullcalendar/moment.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('fullcalendar/fullcalendar.js') }}" crossorigin="anonymous"></script>
+    
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+</head>
+<body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('layouts.nav_left');
+        @include('layouts.nav_left')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        @include('layouts.content');
+        @include('layouts.content')
         <!-- End of Content Wrapper -->
 
     </div>
@@ -80,25 +75,10 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('template/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('template/js/sb-admin-2.min.js')}}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('template/vendor/chart.js/Chart.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('template/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{ asset('template/js/demo/chart-pie-demo.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
+    @yield('javascript')
 </body>
 
 </html>

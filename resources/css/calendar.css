@@ -1,0 +1,29 @@
+input[type=time]::-webkit-datetime-edit-ampm-field {
+    display: none;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+}
+#calendar {
+    max-width: 900px;
+    margin: 40px auto;
+    }
+    #myModal{
+        width: 500px;
+        position: absolute;
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #modal-view{
+        width: 500px;
+        position: absolute;
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    input[type=time]::-webkit-datetime-edit-ampm-field {
+    display: none;
+    }

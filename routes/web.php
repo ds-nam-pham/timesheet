@@ -32,10 +32,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', UsersController::class);
     Route::resource('timesheet', TimesheetsController::class);
     // //fullcalender
-    Route::get('/fullcalendar1',[FullCalendarController::class,'index'])->name('fullcalendar.index');
-    Route::post('/fullcalendar',[FullCalendarController::class,'store'])->name('fullcalendar.store');
-    Route::patch('/fullcalendar/{timesheet}',[FullCalendarController::class,'update'])->name('fullcalendar.update');
-    Route::delete('/fullcalendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('fullcalendar.destroy');
-    Route::get('/fullcalendar/{timesheet}',[FullCalendarController::class,'show'])->name('fullcalendar.show');
+    Route::get('/calendar',[FullCalendarController::class,'index'])->name('calendar.index');
+    Route::post('/calendar',[FullCalendarController::class,'store'])->name('calendar.store');
+    Route::patch('/calendar/{timesheet}',[FullCalendarController::class,'update'])->name('calendar.update');
+    Route::delete('/calendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('calendar.destroy');
+    Route::get('/calendar/{timesheet}',[FullCalendarController::class,'show'])->name('calendar.show');
 });
 

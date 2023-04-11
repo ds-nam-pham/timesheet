@@ -42,6 +42,7 @@ class TimesheetPolicy
     public function create(User $user)
     {
         //
+        
     }
 
     /**
@@ -54,6 +55,7 @@ class TimesheetPolicy
     public function update(User $user, Timesheet $timesheets)
     {
         //
+        return $user->id !== $timesheets->user_id;
     }
 
     /**
@@ -66,6 +68,7 @@ class TimesheetPolicy
     public function delete(User $user, Timesheet $timesheets)
     {
         //
+        return $user->id !== $timesheets->user_id;
     }
 
     /**
@@ -89,6 +92,6 @@ class TimesheetPolicy
      */
     public function forceDelete(User $user, Timesheet $timesheets)
     {
-        //
+        
     }
 }
