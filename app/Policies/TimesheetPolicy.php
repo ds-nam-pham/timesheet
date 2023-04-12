@@ -19,6 +19,7 @@ class TimesheetPolicy
     public function viewAny(User $user)
     {
         //
+        return $user->role == 1;
     }
 
     /**
@@ -31,6 +32,9 @@ class TimesheetPolicy
     public function view(User $user, Timesheet $timesheets)
     {
         //
+        if($user->id === $timesheets->user_id || ($user->isManager() && $timesheets->user->manager_id === $user->id) || $user->isAdmin()){
+            return true;
+        }
     }
 
     /**
@@ -54,8 +58,9 @@ class TimesheetPolicy
      */
     public function update(User $user, Timesheet $timesheets)
     {
-        //
-        return $user->id !== $timesheets->user_id;
+        if($user->id === $timesheets->user_id || ($user->role == 2 && $timesheets->user->manager_id === $user->id) || $user->role == 1){
+            return true;
+        }
     }
 
     /**
@@ -68,7 +73,7 @@ class TimesheetPolicy
     public function delete(User $user, Timesheet $timesheets)
     {
         //
-        return $user->id !== $timesheets->user_id;
+        return $user->id === $timesheets->user_id;
     }
 
     /**

@@ -21,21 +21,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [AuthController::class,'showRegister'])->name('register');
-Route::post('/post-register', [AuthController::class,'register'])->name('post.register');
-Route::get('/login', [AuthController::class,'showLogin'])->name('login');
-Route::post('/post-login', [AuthController::class,'login'])->name('post.login');
-Route::get('/logout', [AuthController::class, 'signOut'])->name('signout');
+Route::get('register', [AuthController::class,'showRegister'])->name('register');
+Route::post('post-register', [AuthController::class,'register'])->name('post.register');
+Route::get('login', [AuthController::class,'showLogin'])->name('login');
+Route::post('post-login', [AuthController::class,'login'])->name('post.login');
+Route::get('logout', [AuthController::class, 'signOut'])->name('signout');
 
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', UsersController::class);
     Route::resource('timesheet', TimesheetsController::class);
+    Route::get('users/{user}/timesheets/',[UsersController::class,'userTimesheets'])->name('users.timesheets.index');
     // //fullcalender
-    Route::get('/calendar',[FullCalendarController::class,'index'])->name('calendar.index');
-    Route::post('/calendar',[FullCalendarController::class,'store'])->name('calendar.store');
-    Route::patch('/calendar/{timesheet}',[FullCalendarController::class,'update'])->name('calendar.update');
-    Route::delete('/calendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('calendar.destroy');
-    Route::get('/calendar/{timesheet}',[FullCalendarController::class,'show'])->name('calendar.show');
+    Route::get('calendar',[FullCalendarController::class,'index'])->name('calendar.index');
+    Route::post('calendar',[FullCalendarController::class,'store'])->name('calendar.store');
+    Route::patch('calendar/{timesheet}',[FullCalendarController::class,'update'])->name('calendar.update');
+    Route::delete('calendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('calendar.destroy');
+    Route::get('calendar/{timesheet}',[FullCalendarController::class,'show'])->name('calendar.show');
+    
 });
 

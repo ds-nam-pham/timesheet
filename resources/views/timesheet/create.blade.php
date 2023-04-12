@@ -12,12 +12,16 @@
             <input type="text" name="task_content" class="form-control" id="task_content" aria-describedby="">
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" name="date" class="form-control" id="date" aria-describedby="">
+            <label for="date" class="form-label">Date Start</label>
+            <input type="datetime-local" name="date" class="form-control" id="date" aria-describedby="">
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date End</label>
+            <input type="datetime-local" name="end_date" class="form-control" id="end_date" aria-describedby="">
         </div>
         <div class="mb-3">
             <label for="time_spent" class="form-label">Time spent</label>
-            <input type="time" name="time_spent" class="form-control" id="time_spent">
+            <input type="text" name="time_spent" class="form-control" id="time_spent" readonly>
         </div>
         <div class="mb-3">
             <label for="difficulties" class="form-label">Difficulties</label>
@@ -30,3 +34,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @stop
+@section('javascript')
+  @vite(['resources/js/timesheet/timesheet.js'])
+@endsection

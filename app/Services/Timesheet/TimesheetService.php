@@ -19,6 +19,7 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
             'task_id' => Arr::get($data,'task_id'),
             'task_content' => Arr::get($data,'task_content'),
             'date' => Arr::get($data,'date'),
+            'end_date' => Arr::get($data,'end_date'),
             'time_spent' => Arr::get($data,'time_spent'),
             'difficulties' => Arr::get($data,'difficulties'),
             'plan' => Arr::get($data,'plan'),
@@ -33,6 +34,7 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
         $timesheet->task_id = Arr::get($data,'task_id');
         $timesheet->task_content = Arr::get($data,'task_content');
         $timesheet->date = Arr::get($data,'date');
+        $timesheet->end_date = Arr::get($data,'end_date');
         $timesheet->time_spent = Arr::get($data,'time_spent');
         $timesheet->difficulties = Arr::get($data,'difficulties');
         $timesheet->plan = Arr::get($data,'plan');

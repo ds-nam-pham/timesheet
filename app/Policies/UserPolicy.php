@@ -43,6 +43,7 @@ class UserPolicy
     public function create(User $user)
     {
         //
+        return $user->isAdmin();
         
     }
 
@@ -59,7 +60,7 @@ class UserPolicy
         // dd($user->rank >= $users->rank);
         // var_dump($user->rank);
         // dd($users->rank);
-        return $user->rank >= $users->rank;
+        // return $user->role >= $users->role;
     }
 
     /**

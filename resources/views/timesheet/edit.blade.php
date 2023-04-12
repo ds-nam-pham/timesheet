@@ -1,5 +1,4 @@
 @extends('layouts.home')
-
 @section('content')
     <form method="POST" action="{{ route('timesheet.update', $timesheet->id) }}" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -16,8 +15,12 @@
             <input type="text" name="task_content" class="form-control" id="task_content" aria-describedby="" value="{{ $timesheet->task_content }}">
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" name="date" class="form-control" id="date" aria-describedby="" value={{ date("Y-m-d", strtotime($timesheet->date)) }}>
+            <label for="date" class="form-label">Start Date</label>
+            <input type="datetime-local" name="date" class="form-control" id="date" aria-describedby="" value="{{ \Carbon\Carbon::parse($timesheet->date)->format('Y-m-d H:i:s') }}">
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">End Date</label>
+            <input type="datetime-local" name="end_date" class="form-control" id="end_date" aria-describedby="" value="{{ \Carbon\Carbon::parse($timesheet->end_date)->format('Y-m-d H:i:s') }}">
         </div>
         <div class="mb-3">
             <label for="time_spent" class="form-label">Time spent</label>
@@ -34,3 +37,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @stop
+@section('javascript')
+  @vite(['resources/js/timesheet/timesheet.js'])
+@endsection

@@ -7,6 +7,7 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\User\UserService;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -34,6 +35,7 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Auth::user());
         return view('user.create');
     }
 
@@ -100,5 +102,11 @@ class UsersController extends Controller
     {
         $result = $this->userService->delete($user);
         return redirect()->route('user.index');
+    }
+
+    public function userTimesheets(User $user){
+        return view('user.timesheets', [
+            'userTimesheets' => $user->timesheets
+        ]);
     }
 }

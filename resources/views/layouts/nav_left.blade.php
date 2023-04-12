@@ -38,8 +38,9 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ route('timesheet.index') }}">list Timesheet</a>
+                <a class="collapse-item" href="{{ route('timesheet.index') }}">list all timesheet</a>
                 <a class="collapse-item" href="{{ route('timesheet.create') }}">Add Timesheet</a>
+                <a class="collapse-item" href="{{ route('users.timesheets.index', Auth::user()) }}">Timesheet cá nhân</a>
             </div>
         </div>
     </li>

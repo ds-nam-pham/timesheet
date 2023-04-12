@@ -49,4 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Timesheet::class, 'user_id', 'id');
     }
+
+    public function isAdmin()
+    {
+        return $this->role == config('constants.ADMIN');
+    }
+
+    public function isManager()
+    {
+        return $this->role == config('constants.MANAGER');
+    }
 }
