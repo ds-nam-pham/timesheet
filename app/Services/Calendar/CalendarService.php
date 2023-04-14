@@ -14,19 +14,23 @@ class CalendarService extends BaseService implements CalendarServiceInterface
     {
         $this->timesheet = $timesheet;
     }
-    public function find(Timesheet $timesheet){
+    public function find(Timesheet $timesheet)
+    {
         return Timesheet::find($timesheet->id);
     }
 
-    public function createTimesheet($data, User $user){
+    public function createTimesheet($data, User $user)
+    {
         $this->timesheet->createTimesheet($data, $user);
     }
 
-    public function listTimesheet(){
+    public function listTimesheet()
+    {
         return Timesheet::all();
     }
 
-    public function updateTimesheet($data,Timesheet $timesheet, $check){
+    public function updateTimesheet($data,Timesheet $timesheet, $check)
+    {
         if(!$check){
             $timesheet->date = Arr::get($data,'date');
             return $timesheet->save();
@@ -34,7 +38,8 @@ class CalendarService extends BaseService implements CalendarServiceInterface
         return $this->timesheet->updateTimesheet($data, $timesheet);
     }
 
-    public function delete(Timesheet $timesheet){
+    public function delete(Timesheet $timesheet)
+    {
         return $timesheet->delete();
     }
     

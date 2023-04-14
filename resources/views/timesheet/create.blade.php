@@ -1,7 +1,9 @@
 @extends('layouts.home')
-
+@section('css')
+@vite(['resources/css/calendar.css'])
+@endsection
 @section('content')
-    <form method="post" action="{{ route('timesheet.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('timesheet.store') }}" enctype="multipart/form-data" id="form-create">
         {{ csrf_field() }}
         <div class="mb-3">
             <label for="task_id" class="form-label">Task ID</label>

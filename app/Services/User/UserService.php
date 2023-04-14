@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService implements UserServiceInterface
 {
-    public function index(){
+    public function getList(){
         return User::all();
     }
 

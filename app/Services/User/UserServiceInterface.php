@@ -5,7 +5,7 @@ use App\Models\User;
 
 interface UserServiceInterface {
 
-    public function index();
+    public function getList();
     public function find(User $user);
     public function addUser($data);
     public function editUser($data, User $user);

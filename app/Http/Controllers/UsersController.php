@@ -6,13 +6,14 @@ use App\Models\User;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\User\UserService;
+use App\Services\User\UserServiceInterface;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
     protected $userService;
-    public function __construct(UserService $userService)
+    public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
         // $this->authorizeResource(User::class);
@@ -24,7 +25,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $result = $this->userService->index();
+        $result = $this->userService->getList();
         return view('user.index',['users' => $result]);
     }
 
@@ -35,7 +36,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Auth::user());
+        // $this->authorize('create', Auth::user());
         return view('user.create');
     }
 
@@ -87,7 +88,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->authorize('update', $user);
+        // $this->authorize('update', $user);
         $result = $this->userService->editUser($request->all(), $user);
         return redirect()->route('user.index');
     }

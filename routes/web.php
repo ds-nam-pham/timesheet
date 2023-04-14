@@ -31,6 +31,7 @@ Route::get('logout', [AuthController::class, 'signOut'])->name('signout');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', UsersController::class);
     Route::resource('timesheet', TimesheetsController::class);
+    Route::get('timesheet/{timesheet}/approve/',[TimesheetsController::class,'approve'])->name('timesheet.approve');
     Route::get('users/{user}/timesheets/',[UsersController::class,'userTimesheets'])->name('users.timesheets.index');
     // //fullcalender
     Route::get('calendar',[FullCalendarController::class,'index'])->name('calendar.index');

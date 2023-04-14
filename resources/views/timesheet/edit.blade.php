@@ -1,6 +1,9 @@
 @extends('layouts.home')
+@section('css')
+@vite(['resources/css/calendar.css'])
+@endsection
 @section('content')
-    <form method="POST" action="{{ route('timesheet.update', $timesheet->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('timesheet.update', $timesheet->id) }}" enctype="multipart/form-data" id="edit-form">
         {{ csrf_field() }}
         @method('PATCH')
         <div class="mb-3">
@@ -24,7 +27,7 @@
         </div>
         <div class="mb-3">
             <label for="time_spent" class="form-label">Time spent</label>
-            <input type="text" name="time_spent" class="form-control" id="time_spent" value="{{ $timesheet->time_spent }}">
+            <input type="text" name="time_spent" class="form-control" id="time_spent" value="{{ $timesheet->time_spent }}" readonly>
         </div>
         <div class="mb-3">
             <label for="difficulties" class="form-label">Difficulties</label>

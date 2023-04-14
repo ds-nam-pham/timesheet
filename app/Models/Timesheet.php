@@ -20,7 +20,8 @@ class Timesheet extends Model
         'end_date',
         'time_spent',
         'difficulties',
-        'plan'
+        'plan',
+        'status'
     ];
 
     public function user(): HasOne

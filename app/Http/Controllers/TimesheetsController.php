@@ -105,4 +105,12 @@ class TimesheetsController extends Controller
         //
         
     }
+
+    public function approve(Timesheet $timesheet){
+        $user = Auth::user();
+        if ($user->can('update', $timesheet)) {
+            $result = $this->timesheetService->approve($timesheet);
+            return redirect()->route('timesheet.index');
+        }
+    }
 }

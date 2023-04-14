@@ -15,14 +15,17 @@
   </thead>
   <tbody>
     @foreach($timesheets as $timesheet)
-     <tr class="text-center">
-       <th scope="row"> {{ date("d/m/Y", strtotime($timesheet->date))}} </th>
-       <td>{{$timesheet->task_id}}</td>
-       <td>{{$timesheet->task_content}}</td>
-       <td>{{$timesheet->time_spent}}</td>
+     <tr>
+       <th class="text-center" scope="row"> {{ date("d/m/Y", strtotime($timesheet->date))}} </th>
+       <td class="text-center">{{$timesheet->task_id}}</td>
+       <td class="text-center">{{$timesheet->task_content}}</td>
+       <td class="text-center">{{$timesheet->time_spent}}</td>
        <td>
-          <a class="btn btn-sm btn-primary" href="{{ route('timesheet.edit',$timesheet->id) }}">Edit</a>
-          <a class="btn btn-sm btn-success" href="{{ route('timesheet.show',$timesheet->id) }}">Show</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('timesheet.edit',$timesheet->id) }}">Edit</a>
+            <a class="btn btn-sm btn-info" href="{{ route('timesheet.show',$timesheet->id) }}">Show</a>
+          @if($timesheet->status == 0)
+            <a class="btn btn-sm btn-success" href="{{ route('timesheet.approve',$timesheet->id) }}">Approve</a>
+          @endif
        </td>
      </tr>
     @endforeach

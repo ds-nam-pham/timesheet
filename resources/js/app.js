@@ -1,2 +1,5 @@
 import './bootstrap';
-import './calendar/calendar';
+// import 'bootstrap';
+// import 'moment';
+// import 'fullcalendar';
+// import 'validatorjs';

@@ -20,6 +20,7 @@
         "@fullcalendar/interaction": "^6.1.5",
         "fullcalendar": "^6.1.5",
         "jquery": "^3.6.4",
-        "moment": "^2.29.4"
+        "moment": "^2.29.4",
+        "validatorjs": "^3.22.1"
     }
 }

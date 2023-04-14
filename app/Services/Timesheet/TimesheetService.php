@@ -45,4 +45,8 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
     public function delete(Timesheet $timesheet){
         return $timesheet->delete();
     }
+
+    public function approve(Timesheet $timesheet){
+        return $timesheet->update(['status' => 1]);
+    }
 }
