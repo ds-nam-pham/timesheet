@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Auth\AuthService;
+use App\Services\Auth\AuthServiceInterface;
 use App\Services\Timesheet\TimesheetService;
 use App\Services\Timesheet\TimesheetServiceInterface;
 use App\Services\User\UserService;
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     protected array $applicationServices = [
         TimesheetServiceInterface::class => TimesheetService::class,
         UserServiceInterface::class => UserService::class,
+        AuthServiceInterface::class => AuthService::class
     ];
     /**
      * Register any application services.

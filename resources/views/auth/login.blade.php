@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="{{ asset('bootstrap5/css/bootstrap.css') }}" rel="stylesheet">
-    <script src="{{ asset('bootstrap5/js/bootstrap.js') }}" crossorigin="anonymous"></script>
-    <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('template/js/jquery.min.js') }}" crossorigin="anonymous"></script>
-    <script src="{{ asset('template/js/b-admin-2.min') }}" crossorigin="anonymous"></script>
-</head>
-<body>
+@extends('layouts.auth')
+@section('content')
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
@@ -42,7 +28,7 @@
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
-            <a href="#!">Forgot password?</a>
+            <a href="{{ route('forget.password') }}">Forgot password?</a>
           </div>
 
           <!-- Submit button -->
@@ -52,5 +38,4 @@
     </div>
   </div>
 </section>
-</body>
-</html>
+@endsection

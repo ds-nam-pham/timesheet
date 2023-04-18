@@ -50,7 +50,6 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        // dd($request->avatar);
         $result = $this->userService->addUser(
            array_merge($request->validated(),[
                'avatar' => $request->avatar,
@@ -117,5 +116,19 @@ class UsersController extends Controller
         return view('user.timesheets', [
             'userTimesheets' => $user->timesheets
         ]);
+    }
+
+    public function changePassword()
+    {
+        return view('user.chang_password');
+    }
+
+    public function updateChangePassword(StoreUserRequest $request,User $user){
+        $result = $this->userService->changePassword($request->all(), $user);
+        if($result) {
+            return redirect()->route('user.index');
+        } else {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
     }
 }
