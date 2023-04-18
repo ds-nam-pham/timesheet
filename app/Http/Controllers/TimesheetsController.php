@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Timesheet;
 use App\Http\Requests\Timesheet\StoreTimesheetsRequest;
 use App\Http\Requests\Timesheet\UpdateTimesheetsRequest;
+use App\Jobs\SendEmail;
+use App\Mail\SendMail;
 use App\Services\Timesheet\TimesheetService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TimesheetsController extends Controller
 {
@@ -110,6 +113,8 @@ class TimesheetsController extends Controller
         $user = Auth::user();
         if ($user->can('update', $timesheet)) {
             $result = $this->timesheetService->approve($timesheet);
+            $emailJob = new SendEmail($timesheet->user->email);
+            dispatch($emailJob);
             return redirect()->route('timesheet.index');
         }
     }

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Mail\SendMail;
 use App\Services\User\UserService;
 use App\Services\User\UserServiceInterface;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -48,8 +50,14 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        
-        $result = $this->userService->addUser($request->all());
+        // dd($request->avatar);
+        $result = $this->userService->addUser(
+           array_merge($request->validated(),[
+               'avatar' => $request->avatar,
+               'description' => $request->description,
+           ]
+           )
+        );
         return redirect()->route('user.index');
     }
 
