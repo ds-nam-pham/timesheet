@@ -29,4 +29,16 @@ class UpdateUserRequest extends FormRequest
             'password'=> 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name không được bỏ trống',
+            'email.required' => 'Email không được bỏ trống',
+            'password.required' => 'password không được bỏ trống',
+            'email.unique' => 'Email đã tồn tại',
+            'name.max' => 'Bạn nhập quá ký tự',
+            'email.max' => 'Bạn nhập quá ký tự'
+        ];
+    }
 }

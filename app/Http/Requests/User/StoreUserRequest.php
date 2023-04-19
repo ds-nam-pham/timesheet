@@ -24,8 +24,21 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,',
+            'password'=> 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name không được bỏ trống',
+            'email.required' => 'Email không được bỏ trống',
+            'password.required' => 'password không được bỏ trống',
+            'email.unique' => 'Email đã tồn tại',
+            'name.max' => 'Bạn nhập quá ký tự',
+            'email.max' => 'Bạn nhập quá ký tự'
         ];
     }
 }

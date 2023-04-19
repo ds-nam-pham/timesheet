@@ -27,7 +27,7 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
     }
 
     public function listTimesheet(){
-        return Timesheet::all();
+        return Timesheet::paginate(5);
     }
 
     public function updateTimesheet($data,Timesheet $timesheet){

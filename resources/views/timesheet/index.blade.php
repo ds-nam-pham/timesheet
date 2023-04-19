@@ -1,4 +1,7 @@
 @extends('layouts.home')
+@section('css')
+@vite(['resources/css/calendar.css'])
+@endsection
 @section('Page Heading')
   <p>Timesheet</p>
 @stop
@@ -31,4 +34,9 @@
     @endforeach
   </tbody>
 </table>
+<div class="paginationWrap">
+  @if(isset($timesheets) && count($timesheets) > 0)
+      {{ $timesheets->links('paginate') }}
+  @endif
+</div>
 @stop

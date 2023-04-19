@@ -11,10 +11,16 @@
             <label for="name" class="form-label">User Name</label>
             <input type="text" name="name" class="form-control" id="name" aria-describedby="" value="{{ $user->name }}">
         </div>
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" value="{{ $user->email }}">
         </div>
+        @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="avatar" class="form-label">avatar</label>
             <input type="file" name="avatar" class="form-control" id="avatar" value="{{ $user->avatar }}">
@@ -28,10 +34,9 @@
             <label for="passsword" class="form-label">Password</label>
             <input type="password" name="password" class="form-control" id="password" value="{{ $user->password }}">
         </div>
-        <!-- <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
+        @error('password')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @stop

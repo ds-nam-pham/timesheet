@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\ChangePasswordRequest;
 use App\Models\User;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -123,7 +124,7 @@ class UsersController extends Controller
         return view('user.chang_password');
     }
 
-    public function updateChangePassword(StoreUserRequest $request,User $user){
+    public function updateChangePassword(ChangePasswordRequest $request,User $user){
         $result = $this->userService->changePassword($request->all(), $user);
         if($result) {
             return redirect()->route('user.index');

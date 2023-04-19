@@ -24,7 +24,22 @@ class UpdatetimesheetsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'task_id' => 'required',
+            'task_content' => 'required',
+            'date'=> 'required',
+            'end_date' => 'required',
+            'time_spent'=> 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'task_id.required' => 'task_id không được để trống',
+            'task_content.required' => 'content task không được để trống',
+            'date.required'=> 'date start không được để trống',
+            'end_date.required' => 'date end không được để trống',
+            'time_spent.required'=> 'time spent không được để trống'
         ];
     }
 }

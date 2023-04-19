@@ -34,6 +34,11 @@
     @endforeach
   </tbody>
 </table>
+<div class="paginationWrap">
+    @if(isset($users) && count($users) > 0)
+        {{ $users->links('paginate') }}
+    @endif
+</div>
 <script type="text/javascript">
   $('.show_confirm').click(function(e) {
       if(!confirm('Are you sure you want to delete this?')) {

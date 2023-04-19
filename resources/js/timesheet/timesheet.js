@@ -109,24 +109,15 @@ $(function(){
 				required: true
 			},
 			"date": {
-				equalTo: ""
+				required: true
 				
 			},
 			"end_date": {
 				required: true
 			},
             "time_spent": {
-				required: ""
-				
-			},
-            "difficulties": {
-				required: ""
-				
-			},
-            "plan": {
-				required: ""
-				
-			},
+				required: true
+			}
 		},
 		messages: {
 			"task_id": {
@@ -143,12 +134,6 @@ $(function(){
 			},
 			"time_spent": {
 				required: "Bắt buộc nhập time_spent"
-			},
-			"difficulties": {
-				required: "Bắt buộc nhập difficulties"
-			},
-            "plan": {
-				required: "Bắt buộc nhập plan"
 			}
 		}
 	});

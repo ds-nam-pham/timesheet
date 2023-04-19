@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserService extends BaseService implements UserServiceInterface
 {
     public function getList(){
-        return User::all();
+        return User::paginate(5);
     }
 
     public function find(User $user){
