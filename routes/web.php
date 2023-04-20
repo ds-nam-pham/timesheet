@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\TimesheetsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +40,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{user}/timesheets/',[UsersController::class,'userTimesheets'])->name('users.timesheets.index');
     Route::get('users/{user}/change-password/',[UsersController::class,'changePassword'])->name('users.change_password');
     Route::patch('users/{user}/',[UsersController::class,'updateChangePassword'])->name('users.update_change_password');
-    // //fullcalender
+    //fullcalender
     Route::get('calendar',[FullCalendarController::class,'index'])->name('calendar.index');
     Route::post('calendar',[FullCalendarController::class,'store'])->name('calendar.store');
     Route::patch('calendar/{timesheet}',[FullCalendarController::class,'update'])->name('calendar.update');
     Route::delete('calendar/{timesheet}',[FullCalendarController::class,'destroy'])->name('calendar.destroy');
     Route::get('calendar/{timesheet}',[FullCalendarController::class,'show'])->name('calendar.show');
+
+    //excel
+    Route::get('excel', [ExcelController::class, 'export'])->name('excel.export');
+    //filter
+    Route::get('filter', [UsersController::class, 'filter'])->name('user.filter');
     
 });
 

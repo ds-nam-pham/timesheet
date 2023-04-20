@@ -69,4 +69,19 @@ class User extends Authenticatable
             set: fn (string $value) => \Hash::make($value)
         );
     }
+
+    protected function role(): Attribute
+    {
+        return Attribute::make(
+            get: function(string $value) {
+                if($value == '1') {
+                    return 'admin';
+                } elseif ($value == '2') {
+                    return 'manager';
+                } else {
+                    return 'user';
+                }
+            }
+        );
+    }
 }

@@ -9,15 +9,23 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService implements UserServiceInterface
 {
-    public function getList(){
+    public function getList()
+    {
         return User::paginate(5);
     }
 
-    public function find(User $user){
+    public function getUserList()
+    {
+        return User::select('name','email','avatar','description','role')->get();
+    }
+
+    public function find(User $user)
+    {
         return User::find($user->id);
     }
 
-    public function addUser($data){
+    public function addUser($data)
+    {
         return User::create([
             'name' => Arr::get($data,'name'),
             'email' => Arr::get($data,'email'),
@@ -28,7 +36,8 @@ class UserService extends BaseService implements UserServiceInterface
         ]);
     }
 
-    public function editUser($data,User $user){
+    public function editUser($data,User $user)
+    {
         $user->name = Arr::get($data,'name');
         $user->email = Arr::get($data,'email');
         if (Arr::get($data,'avatar')){
@@ -42,7 +51,8 @@ class UserService extends BaseService implements UserServiceInterface
         return true;
     }
 
-    public function delete(User $user){
+    public function delete(User $user)
+    {
         return $user->delete();
     }
 
@@ -58,6 +68,11 @@ class UserService extends BaseService implements UserServiceInterface
             'password' => Hash::make(Arr::get($data,'new_password'))
         ]);
         return true;
+    }
+
+    public function filter($data)
+    {
+        return User::where('name', 'LIKE', '%' . $data->search . '%')->paginate(5);
     }
     
 }

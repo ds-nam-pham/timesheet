@@ -9,7 +9,7 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Mail\SendMail;
 use App\Services\User\UserService;
 use App\Services\User\UserServiceInterface;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,9 +26,13 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = $this->userService->getList();
+        if ($request->has('search')) {
+            $result = $this->userService->filter($request);
+        } else {
+            $result = $this->userService->getList();
+        }
         return view('user.index',['users' => $result]);
     }
 
@@ -131,5 +135,15 @@ class UsersController extends Controller
         } else {
             return back()->with("error", "Old Password Doesn't match!");
         }
+    }
+
+    public function filter(Request $request)
+    {
+        $user = User::query();
+        dd($request->has('name'));
+        if ($request->has('name')) {
+            $user->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+        dd($user->get());
     }
 }
