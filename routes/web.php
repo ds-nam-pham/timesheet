@@ -49,8 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //excel
     Route::get('excel', [ExcelController::class, 'export'])->name('excel.export');
-    //filter
-    Route::get('filter', [UsersController::class, 'filter'])->name('user.filter');
     
 });
 

@@ -14,10 +14,6 @@ class CalendarService extends BaseService implements CalendarServiceInterface
     {
         $this->timesheet = $timesheet;
     }
-    public function find(Timesheet $timesheet)
-    {
-        return Timesheet::find($timesheet->id);
-    }
 
     public function createTimesheet($data, User $user)
     {

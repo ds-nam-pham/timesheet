@@ -20,9 +20,6 @@ class ExcelController extends Controller
     }
     public function export()
     {
-        
-        // $user = $this->userSevice->getUserList();
-        // dd($user);
         return $this->excel->download(new UsersExport($this->userSevice), 'users.xlsx');
     }
 }

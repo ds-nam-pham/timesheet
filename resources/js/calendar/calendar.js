@@ -57,7 +57,6 @@ $(function () {
                 });
             },
             eventClick: function (event) {
-                console.log('/calendar/' + event.id);
                 $.ajax({
                     type: "get",
                     url: '/calendar/' + event.id,
@@ -97,14 +96,6 @@ function view(response, id){
     $('#form_view').find('.save-edit').attr('record_id', id);
     $('#form_view').find('.delete').attr('record_id', id);
 }
-// function getFormattedDate(date) {
-//     let currentDate = new Date(date);
-//     let year = currentDate.getFullYear();
-//     let month = (1 + currentDate.getMonth()).toString().padStart(2, '0');
-//     let day = currentDate.getDate().toString().padStart(2, '0');
-//     return year + '-' + month + '-' + day;
-// }
-
 function update(id) {
     var postData = $('#form_view').serializeArray();
     postData.push({
@@ -125,7 +116,6 @@ function update(id) {
 $('.save-edit').on( "click", function(e) {
     e.preventDefault();
     update($(this).attr('record_id'));
-    // $('#calendar').fullCalendar();
 });
 
 $('.btn-close').on( "click", function(e) {

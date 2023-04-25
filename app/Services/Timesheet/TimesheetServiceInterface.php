@@ -6,8 +6,6 @@ use App\Models\User;
 
 interface TimesheetServiceInterface {
 
-    public function find(Timesheet $timesheet);
-
     public function createTimesheet($data, User $userId);
 
     public function listTimesheet();

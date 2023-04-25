@@ -5,9 +5,6 @@ use App\Models\Timesheet;
 use App\Models\User;
 
 interface CalendarServiceInterface {
-
-    public function find(Timesheet $timesheet);
-
     public function createTimesheet($data, User $userId);
 
     public function listTimesheet();

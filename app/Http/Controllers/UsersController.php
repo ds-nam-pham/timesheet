@@ -28,11 +28,8 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('search')) {
-            $result = $this->userService->filter($request);
-        } else {
-            $result = $this->userService->getList();
-        }
+
+        $result = $this->userService->getList($request);
         return view('user.index',['users' => $result]);
     }
 
@@ -135,15 +132,5 @@ class UsersController extends Controller
         } else {
             return back()->with("error", "Old Password Doesn't match!");
         }
-    }
-
-    public function filter(Request $request)
-    {
-        $user = User::query();
-        dd($request->has('name'));
-        if ($request->has('name')) {
-            $user->where('name', 'LIKE', '%' . $request->name . '%');
-        }
-        dd($user->get());
     }
 }

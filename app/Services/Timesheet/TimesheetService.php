@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class TimesheetService extends BaseService implements TimesheetServiceInterface
 {
-    public function find(Timesheet $timesheet){
-        return Timesheet::find($timesheet->id);
-    }
 
     public function createTimesheet($data, User $user){
         return $user->timesheets()->create([
@@ -38,8 +35,7 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
         $timesheet->time_spent = Arr::get($data,'time_spent');
         $timesheet->difficulties = Arr::get($data,'difficulties');
         $timesheet->plan = Arr::get($data,'plan');
-        $timesheet->save();
-        return true;
+        return $timesheet->save();
     }
 
     public function delete(Timesheet $timesheet){
@@ -47,6 +43,6 @@ class TimesheetService extends BaseService implements TimesheetServiceInterface
     }
 
     public function approve(Timesheet $timesheet){
-        return $timesheet->update(['status' => 1]);
+        return $timesheet->update(['status' => config('constants.APPROVE')]);
     }
 }
