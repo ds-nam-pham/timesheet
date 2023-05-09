@@ -50,10 +50,10 @@ class UserService extends BaseService implements UserServiceInterface
         // return $user->save();
     }
 
-    public function delete(User $user)
-    {
-        return $user->delete();
-    }
+    // public function delete(User $user)
+    // {
+    //     return $user->delete();
+    // }
 
     public function changePassword($data, User $user)
     {
