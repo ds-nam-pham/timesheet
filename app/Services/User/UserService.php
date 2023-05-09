@@ -37,6 +37,7 @@ class UserService extends BaseService implements UserServiceInterface
 
     public function editUser($data,User $user)
     {
+        //day la test git
         $user->name = Arr::get($data,'name');
         $user->email = Arr::get($data,'email');
         if (Arr::get($data,'avatar')){
