@@ -25,12 +25,12 @@ class UserService extends BaseService implements UserServiceInterface
 
     public function addUser($data)
     {
+        //day la test git
         return User::create([
             'name' => Arr::get($data,'name'),
             'email' => Arr::get($data,'email'),
             'avatar' => Arr::get($data,'avatar')->getClientOriginalName(),
             'description' => Arr::get($data,'description'),
-            // 'password' => Hash::make(Arr::get($data,'password')),
             'password' => Arr::get($data,'password'),
         ]);
     }
