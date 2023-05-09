@@ -37,23 +37,22 @@ class UserService extends BaseService implements UserServiceInterface
 
     public function editUser($data,User $user)
     {
-        //day la test git
-        // $user->name = Arr::get($data,'name');
-        // $user->email = Arr::get($data,'email');
-        // if (Arr::get($data,'avatar')){
-        //     $user->avatar = Arr::get($data,'avatar')->getClientOriginalName();
-        // } else {
-        //     $user->avatar = $user->avatar;
-        // } 
-        // $user->description = Arr::get($data,'description');
-        // $user->password = Arr::get($data,'password');
-        // return $user->save();
+        $user->name = Arr::get($data,'name');
+        $user->email = Arr::get($data,'email');
+        if (Arr::get($data,'avatar')){
+            $user->avatar = Arr::get($data,'avatar')->getClientOriginalName();
+        } else {
+            $user->avatar = $user->avatar;
+        } 
+        $user->description = Arr::get($data,'description');
+        $user->password = Arr::get($data,'password');
+        return $user->save();
     }
 
-    // public function delete(User $user)
-    // {
-    //     return $user->delete();
-    // }
+    public function delete(User $user)
+    {
+        return $user->delete();
+    }
 
     public function changePassword($data, User $user)
     {
