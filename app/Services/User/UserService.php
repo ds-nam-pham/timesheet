@@ -30,7 +30,6 @@ class UserService extends BaseService implements UserServiceInterface
             'email' => Arr::get($data,'email'),
             'avatar' => Arr::get($data,'avatar')->getClientOriginalName(),
             'description' => Arr::get($data,'description'),
-            // 'password' => Hash::make(Arr::get($data,'password')),
             'password' => Arr::get($data,'password'),
         ]);
     }
